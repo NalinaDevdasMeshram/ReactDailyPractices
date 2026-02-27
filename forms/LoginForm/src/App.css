@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  position: relative;
+  height: 65vh;
+  width: 55vh;
+  margin: 10px;
+  background-color: #ffffff;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+.toggle-form {
+  display: flex;
+  justify-content: space-around;
+}
+
+.toggle-form {
+  padding: 10px;
+}
+
+.toggle-form button.active {
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+form input {
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 8px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  margin: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.forget-form {
+  z-index: 20;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+.forget-form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80%;
+  height: 50%;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  border-radius: 10px;
+}

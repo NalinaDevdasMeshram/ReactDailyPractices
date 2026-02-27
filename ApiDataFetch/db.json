@@ -1,0 +1,46 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Nalina",
+      "lastName": "Meshram",
+      "age": 27,
+      "email": "Nalina@tech.com"
+    },
+    {
+      "id": 2,
+      "firstName": "Damini",
+      "lastName": "Meshram",
+      "age": 28,
+      "email": "Damini@tech.com"
+    },
+    {
+      "id": 3,
+      "firstName": "pornima",
+      "lastName": "Meshr",
+      "age": 25,
+      "email": "pornima@tech.com"
+    },
+    {
+      "id": 4,
+      "firstName": "Naina",
+      "lastName": "Singh",
+      "age": 20,
+      "email": "Naina@tech.com"
+    },
+    {
+      "id": 5,
+      "firstName": "Nalini",
+      "lastName": "Gaikwad",
+      "age": 30,
+      "email": "Nalini@tech.com"
+    },
+    {
+      "id": 6,
+      "firstName": "Nandini",
+      "lastName": "Rangari",
+      "age": 31,
+      "email": "Nandini@tech.com"
+    }
+  ]
+}
