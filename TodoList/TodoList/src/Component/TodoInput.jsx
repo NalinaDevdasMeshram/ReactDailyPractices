@@ -1,27 +1,68 @@
-import React from "react";
-import { FaBook } from "react-icons/fa";
-const TodoInput = ({ title, setTitle, handleNewTodo }) => {
+import React, { useState } from "react";
+
+const TodoInput = () => {
+  const [todoList, setTodoList] = useState([]);
+  const [input, setInput] = useState("");
+  const [editIndex, setEditIndex] = useState(null);
+
+  const handleAddTodo = (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+    if (editIndex !== null) {
+      const updatedTodo = [...todoList];
+      updatedTodo[editIndex] = input;
+      setTodoList(updatedTodo);
+      setEditIndex(null);
+    } else {
+      setTodoList([...todoList, input]);
+    }
+    setInput("");
+  };
+
+  const handleEdit = (index) => {
+    setInput(todoList[index]);
+    setEditIndex(index);
+  };
+
+  const handleDelete = (index) => {
+    const filterData = todoList.filter((_, i) => i !== index);
+    console.log(filterData);
+    setTodoList(filterData);
+  };
+
   return (
-    <div className=" w-full mt-8 flex flex-col items-center justify-center">
-      <h2 className="m-2 p-2 font-semibold text-3xl">TodoInput</h2>
-      <div className="w-full  bg-gray-100 border rounded-md px-10 py-15 shadow-sm">
-        <div className="flex items-center border rounded-md overflow-hidden bg-white">
-          <FaBook className="text-solid text-lg w-10 h-10 bg-[#10aab2]" />
-          <input
-            type="text"
-            placeholder="New Todo"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full text-2xl p-2 rounded-mb"
-          />
-        </div>
+    <div className="text-2xl px-8 py-12">
+      <h2>ToDo List</h2>
+      <form className="flex justify-center items-center border border-gray-500 mt-10 px-8 py-12 rounded-md">
+        <input
+          type="text"
+          placeholder="Enter Todo Name"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          required
+          className="px-4 py-4 w-100 border border-gray-500 rounded-md"
+        />
         <button
-          className="w-full mt-5 text-2xl bg-[#1f9aa5] text-white py-3 rounded-md hover:bg-[#17848d] transition duration-200 cursor-pointer"
-          onClick={handleNewTodo}
+          onClick={handleAddTodo}
+          className="px-8 py-4 m-8 bg-orange-400 rounded-md cursor-pointer hover:bg-amber-700"
         >
-          Add new task
+          {editIndex !== null ? "update" : "ADD"}
         </button>
-      </div>
+      </form>
+      <ul>
+        {todoList.map((val, index) => {
+          return (
+            <li
+              key={index}
+              className="mt-4 px-8 py-4 flex justify-between shadow-2xl rounded-md"
+            >
+              {val}
+              <button onClick={() => handleEdit(index)}>Edit</button>
+              <button onClick={() => handleDelete(index)}>Delete</button>
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 };
