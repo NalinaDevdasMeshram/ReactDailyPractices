@@ -3,62 +3,47 @@ import React, { useState } from "react";
 const TodoInput = () => {
   const [todoList, setTodoList] = useState([]);
   const [input, setInput] = useState("");
-  const [editIndex, setEditIndex] = useState(null);
+  const [editText, setEditText] = useState(null);
 
-  const handleAddTodo = (e) => {
+  const handleBtnClick = (e) => {
     e.preventDefault();
-    if (!input.trim()) return;
-    if (editIndex !== null) {
-      const updatedTodo = [...todoList];
-      updatedTodo[editIndex] = input;
-      setTodoList(updatedTodo);
-      setEditIndex(null);
+    if (input.trim()) return;
+    if (todoList) {
+      const updateData = [...todoList, input];
+      console.log(updateData);
+      setTodoList(updateData);
     } else {
-      setTodoList([...todoList, input]);
+      alert("something else wrong");
     }
-    setInput("");
-  };
-
-  const handleEdit = (index) => {
-    setInput(todoList[index]);
-    setEditIndex(index);
-  };
-
-  const handleDelete = (index) => {
-    const filterData = todoList.filter((_, i) => i !== index);
-    console.log(filterData);
-    setTodoList(filterData);
+    // setInput("");
   };
 
   return (
-    <div className="text-2xl px-8 py-12">
+    <div className="text-center text-medium m-10 px-8 py-16">
       <h2>ToDo List</h2>
-      <form className="flex justify-center items-center border border-gray-500 mt-10 px-8 py-12 rounded-md">
+      <form className="border border-gray-500 m-10 px-8 py-8 rounded-md">
         <input
           type="text"
           placeholder="Enter Todo Name"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           required
-          className="px-4 py-4 w-100 border border-gray-500 rounded-md"
+          className="border border-gray-500 m-12 w-150 px-8 py-4 text-medium rounded-md"
         />
         <button
-          onClick={handleAddTodo}
-          className="px-8 py-4 m-8 bg-orange-400 rounded-md cursor-pointer hover:bg-amber-700"
+          onClick={handleBtnClick}
+          className="px-8 py-4 bg-orange-500 rounded-md cursor-pointer"
         >
-          {editIndex !== null ? "update" : "ADD"}
+          ADD
         </button>
       </form>
       <ul>
         {todoList.map((val, index) => {
           return (
-            <li
-              key={index}
-              className="mt-4 px-8 py-4 flex justify-between shadow-2xl rounded-md"
-            >
+            <li key={index}>
               {val}
-              <button onClick={() => handleEdit(index)}>Edit</button>
-              <button onClick={() => handleDelete(index)}>Delete</button>
+              <button>Edit</button>
+              <button>Delete</button>
             </li>
           );
         })}
