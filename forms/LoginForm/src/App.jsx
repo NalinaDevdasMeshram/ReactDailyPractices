@@ -1,67 +1,80 @@
-import { useState } from "react";
-import "./App.css";
-export default function App() {
-  const [isLoginActive, setIsLoginActive] = useState(true);
-  const [showForgetForm, setShowForgetForm] = useState(false);
+import React, { useState } from "react";
+const formData = () => {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+  const [submittedData, setSubmittedData] = useState(null);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Form Submitted");
+    setSubmittedData(formData);
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
   };
-
   return (
-    <div className="container">
-      <div className="form-container">
-        <div className="toggle-form">
-          <button
-            className={isLoginActive ? "active" : ""}
-            onClick={() => {
-              (setIsLoginActive(true), setShowForgetForm(false));
-            }}
-          >
-            Login
-          </button>
-          <button
-            className={!isLoginActive ? "active" : ""}
-            onClick={() => {
-              (setIsLoginActive(false), setShowForgetForm(false));
-            }}
-          >
-            SignUp
-          </button>
-        </div>
-      </div>
-      {isLoginActive ? (
-        <form>
-          <input type="text" placeholder="Enter Username" />
-          <input type="password" placeholder="Enter Password" />
-          <a href="#" onClick={() => setShowForgetForm(true)}>
-            Forgot Password?
-          </a>
-          <button onClick={handleSubmit}>Login</button>
+    <form onSubmit={handleSubmit}>
+      <h2>Login Form</h2>
+      <input
+        type="text"
+        name="firstName"
+        placeholder="Enter FirstName"
+        value={formData.firstName}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="text"
+        name="lastName"
+        placeholder="Enter LastName"
+        value={formData.lastName}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="email"
+        name="email"
+        placeholder="Enter Email"
+        value={formData.email}
+        onChange={handleChange}
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        placeholder="Enter Password"
+        value={formData.password}
+        onChange={handleChange}
+      />
+      <button>Submit</button>
+      {submittedData && (
+        <div>
           <p>
-            Don't have an account ?{" "}
-            <a href="#" onClick={() => setIsLoginActive(false)}>
-              SignUp
-            </a>
+            <strong>FirstName:</strong>
+            {submittedData.firstName}
           </p>
-        </form>
-      ) : (
-        <form>
-          <input type="text" placeholder="Enter Username" />
-          <input type="email" placeholder="Enter Email Address" />
-          <input type="password" placeholder="Enter Password" />
-          <button onClick={handleSubmit}>SignUp</button>
-        </form>
+          <p>
+            <strong>LastName:</strong>
+            {submittedData.lastName}
+          </p>
+          <p>
+            <strong>Email:</strong>
+            {submittedData.email}
+          </p>
+        </div>
       )}
-      {showForgetForm && (
-        <form className="backdrop">
-          <h4>Reset Password</h4>
-          <input type="email" placeholder="Enter Email Address" />
-          <input type="password" placeholder="Enter New Password" />
-          <button onClick={handleSubmit}>Reset Password</button>
-        </form>
-      )}
-    </div>
+    </form>
   );
-}
+};
+export default formData;
